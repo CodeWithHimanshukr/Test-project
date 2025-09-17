@@ -97,7 +97,7 @@
 
       <div class="btn-group">
         <button type="submit">Submit</button>
-        <button type="button" webengage.user.login(mobile);
+        <button type="button" 
         class="extra-btn">Extra Button</button>
       </div>
     </form>
@@ -112,7 +112,8 @@
         firstName: document.getElementById("fname").value,
         lastName: document.getElementById("lname").value,
         email: document.getElementById("email").value,
-        mobile: document.getElementById("mobile").value
+        mobile: document.getElementById("mobile").value,
+        submit: webengage.user.login(mobile),
       };
 
       console.log("Form Data Submitted:", formData);
