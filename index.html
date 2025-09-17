@@ -130,10 +130,47 @@
       webengage.user.setAttribute('we_phone', formData.mobile);
 
       console.log("Form Data Submitted:", formData);
-      alert("✅ Registration successful! User should now appear in WebEngage Users table.");
+      alert("Registration successful!");
     } else {
-      console.warn("WebEngage SDK not loaded!");
-      alert("⚠️ WebEngage SDK not loaded. Check integration.");
+      console.warn("Registration Failed !! Please Re Enter Details");
+    }
+  });
+
+   document.getElementById("addToCartBtn").addEventListener("click", function() {
+    if (typeof webengage !== "undefined") {
+      // Track "Added To Cart"
+      webengage.track("Added To Cart", {
+        "Product ID" : 1337,
+        "Price"      : 49,
+        "Quantity"   : 1,
+        "Product"    : "Givenchy Pour Homme Cologne",
+        "Category"   : "Fragrance",
+        "Currency"   : "INR",
+        "Discounted" : true
+      });
+
+      // Track "Order Placed"
+      webengage.track("Order Placed", {
+        "Amount"             : 808,
+        "Product 1 SKU Code" : "UHUH799",
+        "Product 1 Name"     : "Armani Jeans",
+        "Product 1 Price"    : 300,
+        "Product 1 Size"     : "L",
+        "Product 2 SKU Code" : "FBHG746",
+        "Product 2 Name"     : "Jacket",
+        "Product 2 Price"    : 507,
+        "Product 2 Size"     : "L",
+        "Delivery Date"      : new Date("2017-01-09T00:00:00.000Z"),
+        "Delivery City"      : "New Delhi",
+        "Delivery ZIP"       : "94121",
+        "Coupon Applied"     : "BOGO17"
+      });
+
+      console.log("Cart & Order events tracked");
+      alert(" Product added to cart & order placed tracked in WebEngage!");
+    } else {
+      console.warn("Product Not added to cart!");
+      alert("Product Not added to cart!");
     }
   });
 </script>
