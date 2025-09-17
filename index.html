@@ -109,47 +109,33 @@
   </div>
 
   <script>
-    // Handle form submission
-    document.getElementById("myForm").addEventListener("submit", function(event) {
-      event.preventDefault(); // prevent page refresh
-      
-      const formData = {
-        firstName: document.getElementById("fname").value,
-        lastName: document.getElementById("lname").value,
-        email: document.getElementById("email").value,
-        mobile: document.getElementById("mobile").value,
-        
-      };
-      const mobileNumber = document.getElementById("mobile").value;
-
-      if (typeof webengage !== "undefined") {
-        webengage.user.login(mobileNumber);  
-        alert("Submitted! Mobile logged in: " + mobileNumber);
-      } else {
-        console.warn("WebEngage SDK not loaded!");
-        alert("WebEngage SDK not loaded. Check integration.");
-      }
-    });
+  document.getElementById("myForm").addEventListener("submit", function(event) {
+    event.preventDefault();
     
-    console.log("Form Data Submitted:", formData);
-      alert("Form submitted successfully!");
-</script>
-  <script>
-    var webengage;
-    !function(w,e,b,n,g){function o(e,t){e[t[t.length-1]]=function(){r.__queue.push([t.join("."),arguments])}}
-    var i,s,r=w[b],z=" ",l="init options track screen onReady".split(z),a="feedback survey notification".split(z),
-    c="options render clear abort".split(z),p="Open Close Submit Complete View Click".split(z),u="identify login logout setAttribute".split(z);
-    if(!r||!r.__v){
-      for(w[b]=r={__queue:[],__v:"6.0",user:{}},i=0;i<l.length;i++)o(r,[l[i]]);
-      for(i=0;i<a.length;i++)for(s=0;s<c.length;s++)o(r,[a[i],c[s]]);
-      for(i=0;i<p.length;i++)o(r.notification,[p[i]]);
-      for(i=0;i<u.length;i++)o(r.user,[u[i]])
-      var f=e.createElement("script");f.type="text/javascript",f.async=!0,
-      f.src=("https:"==e.location.protocol?"https://ssl.widgets.webengage.com":"http://cdn.widgets.webengage.com")+"/js/webengage-min-v-6.0.js",
-      e.head.appendChild(f)
-    }}(window,document,"webengage");
-  </script>
+    const formData = {
+      firstName: document.getElementById("fname").value,
+      lastName: document.getElementById("lname").value,
+      email: document.getElementById("email").value,
+      mobile: document.getElementById("mobile").value
+    };
 
-  
+    if (typeof webengage !== "undefined") {
+      // Login user with email (recommended unique identifier)
+      webengage.user.login(formData.email);
+
+      // Save attributes
+      webengage.user.setAttribute('we_first_name', formData.firstName);
+      webengage.user.setAttribute('we_last_name', formData.lastName);
+      webengage.user.setAttribute('we_email', formData.email);
+      webengage.user.setAttribute('we_phone', formData.mobile);
+
+      console.log("Form Data Submitted:", formData);
+      alert("✅ Registration successful! User should now appear in WebEngage Users table.");
+    } else {
+      console.warn("WebEngage SDK not loaded!");
+      alert("⚠️ WebEngage SDK not loaded. Check integration.");
+    }
+  });
+</script>
 </body>
 </html>
