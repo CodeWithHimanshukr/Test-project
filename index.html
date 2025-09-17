@@ -113,9 +113,9 @@
         lastName: document.getElementById("lname").value,
         email: document.getElementById("email").value,
         mobile: document.getElementById("mobile").value,
-        submit: webengage.user.login("mobile").value,
+        
       };
-
+      webengage.user.login(mobile);
       console.log("Form Data Submitted:", formData);
       alert("Form submitted successfully!");
     });
