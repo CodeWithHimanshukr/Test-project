@@ -118,43 +118,48 @@
       const mobileNumber = document.getElementById("mobile").value;
 
       if (typeof webengage !== "undefined") {
-        webengage.user.login(mobileNumber);  // WebEngage login with mobile
+        webengage.user.login(mobileNumber);  
         alert("Submitted! Mobile logged in: " + mobileNumber);
       } else {
         console.warn("WebEngage SDK not loaded!");
         alert("WebEngage SDK not loaded. Check integration.");
       }
     });
-      <script>
-  document.getElementById("myForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // prevent page refresh
-    
-    const firstName = document.getElementById("fname").value;
-    const lastName = document.getElementById("lname").value;
-    const email = document.getElementById("email").value;
-    const mobile = document.getElementById("mobile").value;
+     <script>
+    // Handle form submission
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // prevent page refresh
 
-    // Send to WebEngage
-    webengage.user.login(email); // Use email as unique ID
-    webengage.user.setAttribute('we_first_name', firstName);
-    webengage.user.setAttribute('we_last_name', lastName);
-    webengage.user.setAttribute('we_email', email);
-    webengage.user.setAttribute('we_phone', mobile);
+      const fname = document.getElementById("fname").value;
+      const lname = document.getElementById("lname").value;
+      const email = document.getElementById("email").value;
+      const mobile = document.getElementById("mobile").value;
 
-    console.log("User attributes sent to WebEngage:", {
-      firstName,
-      lastName,
-      email,
-      mobile
+      if (typeof webengage !== "undefined") {
+        // Login user with mobile number
+        webengage.user.login(mobile);
+
+        // Set system attributes
+        webengage.user.setAttribute('we_first_name', fname);
+        webengage.user.setAttribute('we_last_name', lname);
+        webengage.user.setAttribute('we_email', email);
+
+        alert("User submitted to WebEngage:\n" + 
+              "Name: " + fname + " " + lname + "\n" +
+              "Email: " + email + "\n" +
+              "Mobile: " + mobile);
+      } else {
+        console.warn("WebEngage SDK not loaded!");
+        alert("WebEngage SDK not loaded. Check integration.");
+      }
     });
-
-    alert("Form submitted successfully and user attributes sent to WebEngage!");
-  });
+  </script>
+      
 </script>
 
       console.log("Form Data Submitted:", formData);
       alert("Form submitted successfully!");
     
-  </script>
+  
 </body>
 </html>
