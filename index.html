@@ -120,7 +120,7 @@
 
     if (typeof webengage !== "undefined") {
       // Login user with email (recommended unique identifier)
-      webengage.user.login(formData.email);
+      webengage.user.login(formData.mobile);
 
       // Save attributes
       webengage.user.setAttribute('we_first_name', formData.firstName);
