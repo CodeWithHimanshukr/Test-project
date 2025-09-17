@@ -115,7 +115,17 @@
         mobile: document.getElementById("mobile").value,
         
       };
-      webengage.user.login(mobile);
+      const mobileNumber = document.getElementById("mobile").value;
+
+      if (typeof webengage !== "undefined") {
+        webengage.user.login(mobileNumber);  // WebEngage login with mobile
+        alert("Submitted! Mobile logged in: " + mobileNumber);
+      } else {
+        console.warn("WebEngage SDK not loaded!");
+        alert("WebEngage SDK not loaded. Check integration.");
+      }
+    });
+      
       console.log("Form Data Submitted:", formData);
       alert("Form submitted successfully!");
     });
